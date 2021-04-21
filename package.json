@@ -14,7 +14,7 @@
   "private": true,
   "license": "GPL-2.0",
   "engines": {
-    "node": "14",
+    "node": ">=14",
     "npm": "7"
   },
   "scripts": {
@@ -35,10 +35,13 @@
     "wpe-build": "next build"
   },
   "dependencies": {
+    "@hurumap-ui/charts": "^0.3.5-alpha.42",
+    "@material-ui/core": "^4.11.3",
     "next": "latest",
     "next-auth": "^3.14.6",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "victory": "^35.5.1"
   },
   "devDependencies": {
     "@apollo/client": "^3.3.14",

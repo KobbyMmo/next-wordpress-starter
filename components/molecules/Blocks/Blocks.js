@@ -1,6 +1,6 @@
+import displayBlock from '@/functions/displayBlock'
 import PropTypes from 'prop-types'
 import React from 'react'
-import displayBlock from '@/functions/displayBlock'
 
 /**
  * Render the Blocks component.

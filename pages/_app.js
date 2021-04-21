@@ -2,6 +2,8 @@ import WordPressProvider from '@/components/common/WordPressProvider'
 import '@/styles/demo.css'
 import '@/styles/index.css'
 import {ApolloProvider} from '@apollo/client'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import {ThemeProvider} from '@material-ui/core/styles'
 import {useApollo} from 'lib/apolloConfig'
 import {Provider} from 'next-auth/client'
 import {DefaultSeo} from 'next-seo'
@@ -10,6 +12,7 @@ import {useRouter} from 'next/router'
 import PropTypes from 'prop-types'
 import {useEffect, useState} from 'react'
 import 'tailwindcss/tailwind.css'
+import theme from '../theme'
 
 /**
  * Render the App component.
@@ -77,28 +80,33 @@ export default function App({Component, pageProps}) {
   })
 
   return (
-    <Provider session={session}>
-      <ApolloProvider client={apolloClient}>
-        <WordPressProvider value={wp}>
-          {error ? (
-            <Error statusCode={500} title={errorMessage} />
-          ) : (
+    <ThemeProvider theme={theme}>
+      <Provider session={session}>
+        <ApolloProvider client={apolloClient}>
+          <WordPressProvider value={wp}>
             <>
-              {!!defaultSeoData && <DefaultSeo {...defaultSeoData} />}
-              {!!preview && (
-                // TODO -- abstract this to a component.
-                <p>
-                  This page is a preview.{' '}
-                  <a href="/api/exit-preview">Click here</a> to exit preview
-                  mode.
-                </p>
+              <CssBaseline />
+              {error ? (
+                <Error statusCode={500} title={errorMessage} />
+              ) : (
+                <>
+                  {!!defaultSeoData && <DefaultSeo {...defaultSeoData} />}
+                  {!!preview && (
+                    // TODO -- abstract this to a component.
+                    <p>
+                      This page is a preview.{' '}
+                      <a href="/api/exit-preview">Click here</a> to exit preview
+                      mode.
+                    </p>
+                  )}
+                  <Component {...componentProps} />
+                </>
               )}
-              <Component {...componentProps} />
             </>
-          )}
-        </WordPressProvider>
-      </ApolloProvider>
-    </Provider>
+          </WordPressProvider>
+        </ApolloProvider>
+      </Provider>
+    </ThemeProvider>
   )
 }
 

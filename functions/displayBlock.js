@@ -67,7 +67,9 @@ const LzbBlockHero = dynamic(() =>
 const AcfBlockMediaText = dynamic(() =>
   import('@/components/blocks/ACF/AcfBlockMediaText')
 )
-
+const BlockAccordion = dynamic(() =>
+  import('@/components/blocks/Themeisle/BlockAccordion')
+)
 /**
  * Decide which block component to display.
  *
@@ -124,6 +126,10 @@ export default function displayBlock(block, index) {
       return <LzbBlockHero attributes={attributes} key={index} />
     case 'acf/acf-media-text':
       return <AcfBlockMediaText attributes={attributes} key={index} />
+    case 'themeisle-blocks/accordion':
+      return <BlockAccordion attributes={attributes} innerBlocks={innerBlocks}  key={index} />
+    // case 'core/group':
+    //   return <BlockGroup group={attributes} innerBlocks={innerBlocks} key={index} />
     default:
       return <pre key={index}>{JSON.stringify(block, null, 2)}</pre>
   }
